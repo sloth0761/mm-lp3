@@ -3,7 +3,7 @@
 import { useState } from "react";
 import posthog from "posthog-js";
 
-export function WaitlistForm() {
+export function WaitlistForm({ source }: { source: string }) {
   const [email, setEmail] = useState("");
   const [loading, setLoading] = useState(false);
   const [success, setSuccess] = useState(false);
@@ -21,7 +21,7 @@ export function WaitlistForm() {
       const response = await fetch("/api/waitlist", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ email }),
+        body: JSON.stringify({ email, source }),
       });
 
       const data = await response.json();
